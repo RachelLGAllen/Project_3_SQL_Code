@@ -10,3 +10,5 @@ The task is to load all of Rockbuster’s data into a relational database manage
 ● Which countries are Rockbuster customers based in?
 ● Where are customers with a high lifetime value based?
 ● Do sales figures vary between geographic regions?
+
+Tableau Presentation:  https://public.tableau.com/app/profile/rachel.allen7798/viz/CareerFoundry3RockbusterPresentation/RockbusterPresentation
