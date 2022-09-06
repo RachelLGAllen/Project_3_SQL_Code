@@ -1,0 +1,70 @@
+#Here is a SQL query using a common table expression
+
+WITH practice_cte (A, B, C, D, E, F, G)
+AS
+(SELECT COUNT(customer.customer_id),
+    customer.customer_id,
+    city.city,
+    country.country AS country_name,
+    customer.first_name,
+    customer.last_name,
+    SUM(payment.amount) AS total_payment
+FROM customer
+INNER JOIN address ON customer.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country ON city.country_id = country.country_id
+INNER JOIN payment ON customer.customer_id = payment.customer_id
+WHERE city.city_id = '42'
+    OR city.city_id = '40'
+    OR city.city_id = '580'
+    OR city.city_id = '8'
+    OR city.city_id = '144'
+    OR city.city_id = '284'
+    OR city.city_id = '407'
+    OR city.city_id = '482'
+    OR city.city_id = '106'
+    OR city.city_id = '486'
+GROUP BY city.city, country.country, customer.customer_id, customer.first_name, customer.last_name)
+SELECT AVG(G) AS average_payment
+FROM practice_cte;
+
+
+
+
+
+WITH practice_cte_2 (count, customer_id, city, country_name)
+AS
+(SELECT COUNT(customer.customer_id),
+    customer.customer_id,
+    city.city,
+    country.country AS country_name,
+    customer.first_name,
+    customer.last_name,
+    SUM(payment.amount) AS total_payment
+FROM customer
+INNER JOIN address ON customer.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country ON city.country_id = country.country_id
+INNER JOIN payment ON customer.customer_id = payment.customer_id
+WHERE city.city_id = '42'
+    OR city.city_id = '40'
+    OR city.city_id = '580'
+    OR city.city_id = '8'
+    OR city.city_id = '144'
+   OR city.city_id = '284'
+    OR city.city_id = '407'
+    OR city.city_id = '482'
+    OR city.city_id = '106'
+    OR city.city_id = '486'
+GROUP BY city.city, 
+ country.country,
+ customer.customer_id, 
+ customer.first_name, 
+ customer.last_name)
+SELECT COUNT(DISTINCT customer_id) AS all_customer_count,
+    COUNT(DISTINCT country_name) AS top_customer_count, 
+    country_name
+FROM practice_cte_2
+GROUP BY country_name
+ORDER BY all_customer_count
+LIMIT 5;
