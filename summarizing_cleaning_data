@@ -1,0 +1,33 @@
+#cleaning data and summarizing data in SQL
+
+SELECT
+    MIN(film_id) AS min_film_id,
+    MAX(film_id) AS max_film_id,
+    MIN(release_year) AS min_release_year,
+    MAX(release_year) AS max_release_year,
+    MIN(rental_duration) AS min_rental_duration,
+    MAX(rental_duration) AS max_rental_duration,
+    MIN(length) AS min_length,
+    MAX(length) AS max_length,
+    MIN(replacement_cost) AS min_replacement_cost,
+    MAX(replacement_cost) AS max_replacement_cost
+FROM film;
+
+
+
+SELECT
+    language_id, COUNT(*)
+FROM film
+GROUP BY language_id ;
+
+SELECT
+    active, COUNT(*)
+FROM customer
+GROUP BY active ;
+
+
+SELECT
+    activebool, COUNT(*)
+FROM customer
+GROUP BY activebool ;
+
