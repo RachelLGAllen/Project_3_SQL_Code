@@ -1,0 +1,55 @@
+#joining tables in SQL
+
+SELECT count(customer_id), city.city, country.country AS country_name
+FROM customer
+INNER JOIN address ON customer.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country on city.country_id = country.country_id
+WHERE country.country_id = '44'
+    OR country.country_id = '23'
+    OR country.country_id = '103'
+    OR country.country_id = '50'
+    OR country.country_id = '60'
+    OR country.country_id = '15' 
+    OR country.country_id = '80'
+    OR country.country_id = '75'
+    OR country.country_id = '97'
+    OR country.country_id = '45'
+        
+GROUP BY city.city, country.country
+ORDER BY 1 DESC
+LIMIT 10;
+
+
+SELECT COUNT(customer.customer_id),
+    customer.customer_id,
+    city.city,
+    country.country AS country_name,
+    customer.first_name,
+    customer.last_name,
+    SUM(payment.amount) AS total_payment
+FROM customer
+INNER JOIN address ON customer.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country ON city.country_id = country.country_id
+INNER JOIN payment ON customer.customer_id = payment.customer_id
+WHERE city.city_id = '42'
+    OR city.city_id = '40'
+    OR city.city_id = '580'
+    OR city.city_id = '8'
+    OR city.city_id = '144'
+    OR city.city_id = '284'
+    OR city.city_id = '407'
+    OR city.city_id = '482'
+    OR city.city_id = '106'
+    OR city.city_id = '486'
+GROUP BY 
+    city.city, 
+    country.country, 
+    customer.customer_id, 
+    customer.first_name, 
+    customer.last_name  
+ORDER BY SUM(payment.amount) DESC
+LIMIT 10;
+
+
